@@ -11,7 +11,7 @@ uuid=$(xray uuid)
 keys=$(xray x25519)
 
 private_key=$(echo "$keys" | awk '/PrivateKey:/ {print $2}')
-public_key=$(echo "$keys" | awk '/):/ {print $2}')
+public_key=$(echo "$keys" | awk '/):/ {print $3}')
 
 pass=$(openssl rand -base64 16)
 
