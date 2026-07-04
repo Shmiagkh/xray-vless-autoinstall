@@ -30,16 +30,6 @@ cat <<EOL > /usr/local/etc/xray/config.json
   },
   "inbounds": [
     {
-      "port": 42638,
-      "tag": "ss",
-      "protocol": "shadowsocks",
-      "settings": {
-        "method": "2022-blake3-aes-128-gcm",
-        "password": "$pass",
-        "network": "tcp,udp"
-      }
-    },
-    {
       "port": 443,
       "protocol": "vless",
       "tag": "vless_tls",
@@ -94,17 +84,13 @@ cat <<EOL > /usr/local/etc/xray/config.json
 }
 EOL
 
+systemctl start xray.service
+
+systemctl enable xray.service
+
+systemctl status xray.service
+
 echo " "
 echo "vless://$uuid@$ip:443?security=reality&encryption=none&pbk=$public_key&headerType=none&fp=chrome&type=tcp&flow=xtls-rprx-vision&sni=www.microsoft.com&sid=$shortid#vless"
 
 qrencode -t ansiutf8 "vless://$uuid@$ip:443?security=reality&encryption=none&pbk=$public_key&headerType=none&fp=chrome&type=tcp&flow=xtls-rprx-vision&sni=www.microsoft.com&sid=$shortid#vless"
-
-echo "ss://$pass@$ip:42638#ss22"
-
-qrencode -t ansiutf8 "ss://$pass@$ip:42638#ss22"
-
-systemctl start xray.service
-
-systemctl status xray.service
-
-systemctl enable xray.service
