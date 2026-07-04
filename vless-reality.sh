@@ -88,8 +88,6 @@ systemctl start xray.service
 
 systemctl enable xray.service
 
-systemctl status xray.service
-
 echo " "
 echo "vless://$uuid@$ip:443?security=reality&encryption=none&pbk=$public_key&headerType=none&fp=chrome&type=tcp&flow=xtls-rprx-vision&sni=www.microsoft.com&sid=$shortid#vless"
 
